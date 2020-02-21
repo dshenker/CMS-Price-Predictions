@@ -63,10 +63,10 @@ set.seed(100)
 model_cost_ridge <- glm(FUTURE_1_PCT ~ BENE_SEX_IDENT_CD + BENE_RACE_CD + AGE + wscore_charlson + costParam, data = ben_2008_final, family = "binomial")
 summary(model_cost_ridge)
 
-ben_2008_final$cost_predict = predict(model_cost_ridge, type=c("response"))             # apply model A to predict the probability of future IP admissions (ranging between 0 and 1)
+ben_2008_final$cost_predict = predict(model_cost_ridge, type=c("response"))           
 model_cost_ridge_roc <- roc(FUTURE_1_PCT ~ cost_predict, data = ben_2008_final)     # apply the ROC function to calculate the ROC information
 plot(model_cost_ridge_roc)                                                                     # plotting the ROC curve for the model 
-as.numeric(model_cost_ridge_roc$auc)                                                           # printing the AUC of the model (0.5576572)
+as.numeric(model_cost_ridge_roc$auc)                                                           # printing the AUC of the model 
 coords(model_cost_ridge_roc, 'best', 'threshold', transpose = FALSE) #0.01458932
 
 #Confusion Matrix
